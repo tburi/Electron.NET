@@ -1,0 +1,9 @@
+﻿<Project>
+  <!-- this will automatically run after the 'Build' target -->
+  <!--<Target Name="RunMyGreeting" AfterTargets="Build">
+    <SayHello />
+  </Target>-->  
+  <Target Name="PrepareElectronFiles" AfterTargets="Build">
+    <PrepareElectronApp ProjectDir="$(ProjectDir)"/>
+  </Target>
+</Project>

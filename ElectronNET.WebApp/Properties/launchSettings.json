@@ -14,7 +14,14 @@
       "commandLineArgs": "start",
       "workingDirectory": "."
     },
-
+    "Electron.NET App-Debug": {
+      "commandName": "Project",
+      "workingDirectory": ".",
+      "commandLineArgs": "/hostFolder=$(ProjectDir)obj\\Host\\ /electronPort=8000",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "environmentVariables": {

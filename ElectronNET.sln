@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElectronNET.WebApp", "ElectronNET.WebApp\ElectronNET.WebApp.csproj", "{7C048379-401C-4345-B5E7-BE232DEA8157}"
 EndProject
@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Changelog.md = Changelog.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElectronNET.MSBuild", "ElectronNET.MSBuild\ElectronNET.MSBuild.csproj", "{F434280C-E1F0-40EC-8110-ACC37DFDE058}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{B33E9B82-B6B4-4DB0-B6EE-61CC34641518}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B33E9B82-B6B4-4DB0-B6EE-61CC34641518}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{B33E9B82-B6B4-4DB0-B6EE-61CC34641518}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{F434280C-E1F0-40EC-8110-ACC37DFDE058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F434280C-E1F0-40EC-8110-ACC37DFDE058}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F434280C-E1F0-40EC-8110-ACC37DFDE058}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F434280C-E1F0-40EC-8110-ACC37DFDE058}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

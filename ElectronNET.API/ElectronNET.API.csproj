@@ -23,6 +23,10 @@ This package contains the API to access the "native" electron API.</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ProcessHelper.cs~RF3cf4d5f3.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="PackageIcon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
@@ -41,6 +45,9 @@ This package contains the API to access the "native" electron API.</Description>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="SocketIoClientDotNet" Version="1.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

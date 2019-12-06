@@ -12,3 +12,9 @@ dotnet restore
 dotnet build --configuration Release --force /property:Version=%ENETVER%
 dotnet pack /p:Version=%ENETVER% --configuration Release --force --output "%~dp0artifacts"
 cd ..
+echo "Restore & Build MSBuild"
+cd ElectronNet.MSBuild
+dotnet restore
+dotnet build --configuration Release --force /property:Version=%ENETVER%
+dotnet pack /p:Version=%ENETVER% --configuration Release --force --output "%~dp0artifacts"
+cd ..

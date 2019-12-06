@@ -9,6 +9,10 @@ echo "Restore & Build CLI"
 cd ElectronNet.CLI
 dotnet restore
 dotnet build
+echo "Restore & Build MSBuild"
+cd ElectronNet.MSBuild
+dotnet restore
+dotnet build
 cd ..
 echo "Restore & Build WebApp Demo"
 cd ElectronNet.WebApp

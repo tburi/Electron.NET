@@ -1,7 +1,7 @@
 ﻿const { app } = require('electron');
 const { BrowserWindow } = require('electron');
 const path = require('path');
-const process = require('child_process').spawn;
+const childProcessSpawn = require('child_process').spawn;
 const portscanner = require('portscanner');
 const imageSize = require('image-size');
 let io, server, browserWindows, ipc, apiProcess, loadURL;
@@ -15,7 +15,8 @@ if(app.commandLine.hasSwitch('manifest')) {
     manifestJsonFileName = app.commandLine.getSwitchValue('manifest');
 };
 
-const currentBinPath = path.join(__dirname.replace('app.asar', ''), 'bin');
+const isVsDebug = isVsDebugEnabled();
+const currentBinPath = isVsDebug ? getVsDebugBinPath() : path.join(__dirname.replace('app.asar', ''), 'bin');
 const manifestJsonFilePath = path.join(currentBinPath, manifestJsonFileName);
 const manifestJsonFile = require(manifestJsonFilePath);
 if (manifestJsonFile.singleInstance || manifestJsonFile.aspCoreBackendPort) {
@@ -47,6 +48,19 @@ app.on('ready', () => {
     });
 
 });
+
+function isVsDebugEnabled() {
+    var vsDebugIndex = process.argv.findIndex((v) => v.toLowerCase().startsWith('vs-debug'));
+    return vsDebugIndex > -1;
+}
+
+function getVsDebugBinPath() {
+    var vsDebugBinIndex = process.argv.findIndex((v) => v.toLowerCase().startsWith('vs-debug-bin'));
+    if (vsDebugBinIndex === -1) {
+        throw Error('missing vs-debug-bin path');
+    }
+    return process.argv[vsDebugBinIndex].split('=')[1];
+}
 
 function isSplashScreenEnabled() {
     if (manifestJsonFile.hasOwnProperty('splashscreen')) {
@@ -152,7 +166,7 @@ function isModuleAvailable(name) {
 }
 
 function startAspCoreBackend(electronPort) {
-    if(manifestJsonFile.aspCoreBackendPort) {
+    if (manifestJsonFile.aspCoreBackendPort) {
         startBackend(manifestJsonFile.aspCoreBackendPort)
     } else {
         // hostname needs to be localhost, otherwise Windows Firewall will be triggered.
@@ -162,6 +176,10 @@ function startAspCoreBackend(electronPort) {
     }
 
     function startBackend(aspCoreBackendPort) {
+        if (isVsDebugEnabled()) {
+            console.log('vs-debug enabled. ASP.NET Core backend already running');
+            return;
+        }
         console.log('ASP.NET Core Port: ' + aspCoreBackendPort);
         loadURL = `http://localhost:${aspCoreBackendPort}`;
         const parameters = [`/electronPort=${electronPort}`, `/electronWebPort=${aspCoreBackendPort}`];
@@ -174,7 +192,7 @@ function startAspCoreBackend(electronPort) {
 
         let binFilePath = path.join(currentBinPath, binaryFile);
         var options = { cwd: currentBinPath };
-        apiProcess = process(binFilePath, parameters, options);
+        apiProcess = childProcessSpawn(binFilePath, parameters, options);
 
         apiProcess.stdout.on('data', (data) => {
             console.log(`stdout: ${data.toString()}`);

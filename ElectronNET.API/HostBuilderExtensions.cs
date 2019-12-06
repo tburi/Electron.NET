@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 
 namespace ElectronNET.API
@@ -6,7 +8,7 @@ namespace ElectronNET.API
     /// <summary>
     /// 
     /// </summary>
-    public static class WebHostBuilderExtensions
+    public static class HostBuilderExtensions
     {
         /// <summary>
         /// Use a Electron support for this .NET Core Project.
@@ -14,27 +16,36 @@ namespace ElectronNET.API
         /// <param name="builder">The builder.</param>
         /// <param name="args">The arguments.</param>
         /// <returns></returns>
-        [Obsolete("The new .NET Generic Host builder should be used instead. Call UseElectron on ")]
-        public static IWebHostBuilder UseElectron(this IWebHostBuilder builder, string[] args)
+        public static IHostBuilder UseElectron(this IHostBuilder builder, string[] args)
         {
+            builder.ConfigureServices((context, services) =>
+            {
+                if (context.HostingEnvironment.IsDevelopment())
+                {
+                    services.AddHostedService<ElectronDebugLauncher>();
+                }
+            });
+
             foreach (string argument in args)
             {
                 if (argument.ToUpper().Contains("ELECTRONPORT"))
                 {
                     BridgeSettings.SocketPort = argument.ToUpper().Replace("/ELECTRONPORT=", "");
                     Console.WriteLine("Use Electron Port: " + BridgeSettings.SocketPort);
-                } else if(argument.ToUpper().Contains("ELECTRONWEBPORT"))
+                }
+                else if (argument.ToUpper().Contains("ELECTRONWEBPORT"))
                 {
                     BridgeSettings.WebPort = argument.ToUpper().Replace("/ELECTRONWEBPORT=", "");
                 }
             }
-
-            if(HybridSupport.IsElectronActive)
+            if (HybridSupport.IsElectronActive)
             {
-                builder.UseContentRoot(AppDomain.CurrentDomain.BaseDirectory)
-                    .UseUrls("http://127.0.0.1:" + BridgeSettings.WebPort);
+                builder.UseContentRoot(AppDomain.CurrentDomain.BaseDirectory);
+                builder.ConfigureWebHost(webBuilder =>
+                {
+                    webBuilder.UseUrls("http://127.0.0.1:" + BridgeSettings.WebPort);
+                });
             }
-
             return builder;
         }
     }

@@ -41,14 +41,14 @@
   </ItemGroup>
   <!-- this is required only if the ElectronNET.MSBuild package is not added with PackageReference -->
   <UsingTask TaskName="ElectronNET.MSBuildTasks.PrepareElectronApp" AssemblyFile="..\ElectronNET.MSBuild\bin\Debug\netstandard2.0\ElectronNET.MSBuild.dll" />
-  <Target Name="PrepareElectronFiles" AfterTargets="AfterBuild">
-    <PrepareElectronApp ProjectDir="$(ProjectDir)"/>
-  </Target>
-  <!-- add msbuild task like this with nuget and update the version attribute -->
+  <!-- add msbuild task like this with nuget and update the version attribute, the task is imported automatically when using the nuget package -->
   <!--<ItemGroup>
     <PackageReference Include="ElectronNET.MSBuild" Version="99.0.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>-->
-  
+   <!-- the build target needs to be added manually -->
+  <Target Name="PrepareElectronFiles" AfterTargets="AfterBuild">
+    <PrepareElectronApp ProjectDir="$(ProjectDir)"/>
+  </Target>   
 </Project>

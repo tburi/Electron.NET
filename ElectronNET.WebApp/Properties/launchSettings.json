@@ -17,7 +17,15 @@
     "Electron.NET App-Debug": {
       "commandName": "Project",
       "workingDirectory": ".",
-      "commandLineArgs": "/hostFolder=$(ProjectDir)obj\\Host\\ /electronPort=8000",
+      "commandLineArgs": "--vs-debug-port=5000",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Electron.NET App-Debug-OptionsWithDefaults": {
+      "commandName": "Project",
+      "workingDirectory": ".",
+      "commandLineArgs": "--vs-debug-port=5000 --electronHostFolder=$(ProjectDir)obj\\Host ",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }

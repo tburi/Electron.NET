@@ -5,6 +5,7 @@
     /// </summary>
     public static class HybridSupport
     {
+      
         /// <summary>
         /// Gets a value indicating whether this instance is electron active.
         /// </summary>
@@ -15,7 +16,7 @@
         {
             get
             {
-                return !string.IsNullOrEmpty(BridgeSettings.SocketPort);
+                return !string.IsNullOrEmpty(BridgeSettings.SocketPort) || BridgeSettings.IsVsDebugEnabled;
             }
         }
     }

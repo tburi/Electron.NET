@@ -20,5 +20,11 @@
         /// The web port.
         /// </value>
         public static string WebPort { get; internal set; }
+
+        /// <summary>
+        /// Indicates if the instance was started using the vs-debug arguments
+        /// </summary>
+        public static bool IsVsDebugEnabled { get; internal set; } = false;
+
     }
 }

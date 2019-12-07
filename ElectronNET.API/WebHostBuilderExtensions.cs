@@ -14,9 +14,9 @@ namespace ElectronNET.API
         /// <param name="builder">The builder.</param>
         /// <param name="args">The arguments.</param>
         /// <returns></returns>
-        [Obsolete("The new .NET Generic Host builder should be used instead. Call UseElectron on ")]
+        [Obsolete("The new .NET Generic Host builder should be used instead. Call UseElectron on IHostBuilder")]
         public static IWebHostBuilder UseElectron(this IWebHostBuilder builder, string[] args)
-        {
+        {            
             foreach (string argument in args)
             {
                 if (argument.ToUpper().Contains("ELECTRONPORT"))

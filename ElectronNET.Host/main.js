@@ -19,7 +19,7 @@ const isVsDebug = isVsDebugEnabled();
 const currentBinPath = isVsDebug ? getVsDebugBinPath() : path.join(__dirname.replace('app.asar', ''), 'bin');
 const manifestJsonFilePath = path.join(currentBinPath, manifestJsonFileName);
 const manifestJsonFile = require(manifestJsonFilePath);
-if (manifestJsonFile.singleInstance || manifestJsonFile.aspCoreBackendPort) {
+if (manifestJsonFile.singleInstance || manifestJsonFile.aspCoreBackendPort || isVsDebug) {
     const mainInstance = app.requestSingleInstanceLock();
     app.on('second-instance', () => {
         const windows = BrowserWindow.getAllWindows();

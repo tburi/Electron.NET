@@ -45,10 +45,7 @@
     <EmbeddedResource Include="..\ElectronNET.Host\package.json" Link="ElectronHost\package.json" />
     <EmbeddedResource Include="..\ElectronNET.Host\main.js" Link="ElectronHost\main.js" />
     <EmbeddedResource Include="..\ElectronNET.Host\build-helper.js" Link="ElectronHost\build-helper.js" />
-    <EmbeddedResource Include="..\ElectronNET.Host\api\ipc.js" Link="ElectronHost\api\ipc.js" />
-  </ItemGroup>
-  
-    <ItemGroup>
+    <EmbeddedResource Include="..\ElectronNET.Host\api\ipc.js" Link="ElectronHost\api\ipc.js" />  
     <EmbeddedResource Include="..\ElectronNET.Host\ElectronHostHook\index.ts" Link="ElectronHost\ElectronHostHook\index.ts" />
     <EmbeddedResource Include="..\ElectronNET.Host\ElectronHostHook\connector.ts" Link="ElectronHost\ElectronHostHook\connector.ts" />
     <EmbeddedResource Include="..\ElectronNET.Host\ElectronHostHook\tsconfig.json" Link="ElectronHost\ElectronHostHook\tsconfig.json" />

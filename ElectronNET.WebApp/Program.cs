@@ -17,10 +17,10 @@ namespace ElectronNET.WebApp
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureLogging((hostingContext, logging) => { logging.AddConsole(); })
+                .UseElectron(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-                .UseElectron(args);
+                });               
     }
 }
